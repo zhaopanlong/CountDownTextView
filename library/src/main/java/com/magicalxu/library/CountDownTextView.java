@@ -132,7 +132,7 @@ public class CountDownTextView extends TextSwitcher
      */
     public void start() {
         timer.start();
-        setBackgroundResource(BgDisableResId);
+        textHint(true);
     }
 
     /**
