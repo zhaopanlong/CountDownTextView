@@ -35,12 +35,17 @@
 
     <com.magicalxu.library.CountDownTextView
         android:id="@+id/id_button_normal"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        magical:text_color="@color/selector_verify_code_text_color"
+        magical:disable_background="@drawable/shape_disable"
+        magical:enable_background="@drawable/shape_enable"
+        magical:gap_string_format="%s秒后重新获取"
+        magical:total_time="10"
         android:paddingTop="5dp"
         magical:text_size="14sp" />
   </LinearLayout>

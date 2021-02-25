@@ -70,8 +70,8 @@ public class CountDownTextView extends TextSwitcher
         setOnClickListener(this);
 
         countDownFinish = true; //允许第一次点击
-        setBackgroundResource(BgEnableResId);
         setText(initString);
+        textHint(false);
     }
 
     /**
@@ -100,8 +100,8 @@ public class CountDownTextView extends TextSwitcher
                 android.R.color.transparent);
 
         //动画
-        animIn = ta.getResourceId(R.styleable.CountDownTextView_anim_in, android.R.anim.fade_in);
-        animOut = ta.getResourceId(R.styleable.CountDownTextView_anim_out, android.R.anim.fade_out);
+        animIn = ta.getResourceId(R.styleable.CountDownTextView_anim_in, 0);
+        animOut = ta.getResourceId(R.styleable.CountDownTextView_anim_out, 0);
 
         //总时长 （秒）
         TOTAL_MILLS = ta.getInteger(R.styleable.CountDownTextView_total_time, 60);
@@ -150,7 +150,6 @@ public class CountDownTextView extends TextSwitcher
         timer.cancel();
         countDownFinish = true;
         setText(initString);
-        setBackgroundResource(BgEnableResId);
         textHint(false);
     }
 
@@ -182,7 +181,6 @@ public class CountDownTextView extends TextSwitcher
         countDownFinish = true;
         String show = tipString;
         setText(show);
-        setBackgroundResource(BgEnableResId);
         textHint(false);
     }
 
@@ -205,7 +203,6 @@ public class CountDownTextView extends TextSwitcher
         }
 
         setText(gap);
-        textHint(true);
     }
 
     /**
@@ -213,8 +210,13 @@ public class CountDownTextView extends TextSwitcher
      */
     private void configSwitcher() {
         setFactory(this);
-        setInAnimation(getContext(), animIn);
-        setOutAnimation(getContext(), animOut);
+        if (animIn != 0){
+            setInAnimation(getContext(), animIn);
+        }
+        if (animOut != 0){
+            setOutAnimation(getContext(), animOut);
+
+        }
     }
 
     /**
@@ -229,6 +231,8 @@ public class CountDownTextView extends TextSwitcher
      */
     public void textHint(boolean hint) {
         setSelected(hint);
+        setEnabled(!hint);
+        setBackgroundResource(hint ? BgDisableResId : BgEnableResId);
     }
 
     /**
